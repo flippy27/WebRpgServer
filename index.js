@@ -1,17 +1,19 @@
 require('dotenv').config();
+
 const express = require('express');
 const app = express();
+const jwt = require('jsonwebtoken');
+
+//parsing data
 const bodyParser = require('body-parser');
-const router = require('./routes/route_index');
+app.use(express.json());
 
+//routing
+const usersRoutes = require('./routes/users');
+app.use('/users',usersRoutes);
 
-const PORT = process.env.PORT || 5678;
-
-// middlewares
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-console.log(router);
+//server run
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log('listening on port ' + PORT);
 });

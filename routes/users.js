@@ -2,9 +2,7 @@ const jwt = require('jsonwebtoken');
 
 
 const express = require('express');
-const apiRoutes = express.Router();
-const shortid = require('shortid');
-const chalk = require('chalk');
+const router = express.Router();
 const mysql = require('mysql');
 const { database } = require('../keys');
 
@@ -18,8 +16,7 @@ conn.connect((err) => {
     }
 });
 
-apiRoutes.get('/getAllUsers', (req, res) => {
-    console.log('asdkjakso');
+router.get('/', (req, res) => {
     conn.query(`SELECT * from user`, (err, result) => {
         if (err) {
             console.log(err);
@@ -28,4 +25,4 @@ apiRoutes.get('/getAllUsers', (req, res) => {
     });
 });
 
-module.exports = apiRoutes;
+module.exports = router;
